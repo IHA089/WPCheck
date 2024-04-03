@@ -65,13 +65,17 @@ def url_form_file(input_file):
         lines = reader.readlines()
     
     for line in lines:
-        if check_is_wordpress_site(line):
-            print("{} : site Deisng by wordpress".format(line))
-            print("\n======================= Scanning {} ====================\n".format(line))
-            check_file_vuln(line)
-            print("========================== Finish =========================\n\n")
+        line=line.replace("\n","")
+        if line == "":
+            pass
         else:
-            print("{} : Not wordpress site".format(line))
+            if check_is_wordpress_site(line):
+                print("{} : site Deisng by wordpress".format(line))
+                print("\n======================= Scanning {} ====================\n".format(line))
+                check_file_vuln(line)
+                print("========================== Finish =========================\n\n")
+            else:
+                print("{} : Not wordpress site".format(line))
     print("\n++++++++++++++++++++++++++++ Complete +++++++++++++++++++++++++++++++")
 
 def Main():
